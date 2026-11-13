@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kopi Kenangan - Manisnya Setiap Kenangan</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS Terpisah -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Kopi <strong>Kenangan</strong></span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#beranda">Beranda</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#tentang">Tentang</a></li>
+                    <li>
+                        <button id="btn-keranjang-nav" class="nav-cart-btn">
+                            🛒 Keranjang <span id="cart-count" class="badge">0</span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="beranda" class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <span class="tagline">✨ Kenangan Manis Dimulai Dari Sini</span>
+                <h1>Ngopi Santai, Rasa Tak Terlupakan</h1>
+                <p>Nikmati perpaduan biji kopi pilihan Indonesia dengan gula aren murni. Bikin harimu kembali fresh dan bersemangat!</p>
+                <div class="hero-actions">
+                    <a href="#menu" class="btn btn-primary">Lihat Menu Favorit</a>
+                    <a href="#tentang" class="btn btn-outline">Cerita Kami</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=600&q=80" alt="Kopi Kenangan Segar">
+            </div>
+        </div>
+    </section>
+
+    <!-- MENU SECTION -->
+    <section id="menu" class="menu-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Menu Pilihan Kopi Kenangan</h2>
+                <p>Klik tombol <strong>+ Tambah</strong> untuk memasukkan ke keranjang belanja kamu.</p>
+            </div>
+
+            <!-- Tombol Filter Kategori (Manipulasi DOM) -->
+            <div class="filter-container">
+                <button class="filter-btn active" data-category="semua">Semua Menu</button>
+                <button class="filter-btn" data-category="kopi">Kopi Kenangan</button>
+                <button class="filter-btn" data-category="non-kopi">Non-Kopi</button>
+                <button class="filter-btn" data-category="camilan">Roti & Camilan</button>
+            </div>
+
+            <!-- Grid Menu (Di-generate lewat JavaScript DOM) -->
+            <div id="menu-grid" class="menu-grid"></div>
+        </div>
+    </section>
+
+    <!-- TENTANG KAMI SECTION -->
+    <section id="tentang" class="about-section">
+        <div class="container about-content">
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80" alt="Suasana Cafe">
+            </div>
+            <div class="about-text">
+                <h2>Kenapa Harus Kopi Kenangan?</h2>
+                <p>Kami menyajikan racikan kopi dengan cita rasa lokal yang otentik. Menggunakan 100% biji kopi Nusantara berkualitas, susu segar pilihan, dan gula aren asli.</p>
+                
+                <ul class="features-list">
+                    <li>❤️ <strong>Gula Aren Asli:</strong> Manis pas dan aromanya khas bikin rindu.</li>
+                    <li>☕ <strong>Biji Kopi Nusantara:</strong> Di-roast dengan tingkat kematangan pas.</li>
+                    <li>🛵 <strong>Cepat & Praktis:</strong> Pas buat teman kerja, nongkrong, atau belajar.</li>
+                </ul>
+
+                <!-- DOM Interaktif: Form Masukan Pengunjung -->
+                <div class="simple-feedback-box">
+                    <h3>Punya Saran Menu Baru?</h3>
+                    <div class="input-group">
+                        <input type="text" id="feedback-input" placeholder="Tulis ide menu kamu di sini...">
+                        <button id="btn-kirim-saran" class="btn btn-primary">Kirim</button>
+                    </div>
+                    <p id="feedback-result" class="feedback-msg"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL KERANJANG (DOM Controlled) -->
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-box">
+            <div class="cart-header">
+                <h3>🛒 Keranjang Pesanan Kamu</h3>
+                <button id="btn-close-cart" class="btn-close">&times;</button>
+            </div>
+            
+            <div id="cart-items" class="cart-items-container">
+                <p class="empty-cart-text">Keranjang kamu masih kosong nih. Yuk pilih menu dulu!</p>
+            </div>
+
+            <div class="cart-footer">
+                <div class="total-row">
+                    <span>Total Pembayaran:</span>
+                    <strong id="cart-total-price">Rp 0</strong>
+                </div>
+                <div class="cart-action-btns">
+                    <button id="btn-clear-cart" class="btn btn-outline-danger">Kosongkan</button>
+                    <button id="btn-checkout" class="btn btn-primary btn-checkout">Pesan Sekarang</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL POPUP CHECKOUT BERHASIL -->
+    <div id="order-success-modal" class="order-modal">
+        <div class="order-box">
+            <div class="order-icon">🎉</div>
+            <h3>Pesananmu Sudah Diterima!</h3>
+            <p>Terima kasih sudah memesan di <strong>Kopi Kenangan</strong>. Barista kami sedang menyiapkan pesananmu dengan sepenuh hati.</p>
+            <div id="order-receipt" class="receipt-box"></div>
+            <button id="btn-close-order" class="btn btn-primary">Tutup & Pesan Lagi</button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-info">
+                <h3>☕ Kopi Kenangan</h3>
+                <p>Menemani hari-harimu dengan secangkir kenangan hangat dan manis.</p>
+            </div>
+            <div class="footer-hours">
+                <h4>Jam Buka</h4>
+                <p>Senin - Minggu: 08:00 - 22:00 WIB</p>
+            </div>
+            <div class="footer-social">
+                <h4>Kontak & Sosmed</h4>
+                <p>Instagram: @kopikenangan.id</p>
+                <p>WhatsApp: 0812-3456-7890</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Kopi Kenangan - Website Satu Halaman (HTML, CSS & JavaScript DOM)</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Terpisah -->
+    <script src="script.js"></script>
+</body>
+</html>
